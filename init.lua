@@ -1,4 +1,4 @@
-local vim = vim
+-- local vim = vim
 
 vim.cmd('set termguicolors')
 vim.g.mapleader = ' '
@@ -78,9 +78,6 @@ require('lazy').setup({
         'nvim-tree/nvim-web-devicons',
     },
     {
-        'olimorris/onedarkpro.nvim',
-    },
-    {
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -101,11 +98,11 @@ require('lazy').setup({
     },
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'SmiteshP/nvim-navic' },
+        dependencies = { 'SmiteshP/nvim-navic', 'utilyre/barbecue.nvim' },
         config = function()
             require('lualine').setup({
                 options = {
-                    theme = 'material',
+                    theme = 'auto',
                     component_separators = {
                         left = '|',
                         right = '|',
@@ -133,10 +130,11 @@ require('lazy').setup({
     },
     -- Colorscheme
     {
-        'marko-cerovac/material.nvim',
+        -- old: marko-cerovac/material.nvim, with deepocean
+        'diegoulloao/neofusion.nvim',
         config = function()
-            vim.g.material_style = 'deep ocean'
-            vim.cmd('colorscheme material')
+            vim.g.background = 'dark'
+            vim.cmd('colorscheme neofusion')
         end,
     },
 
@@ -261,13 +259,6 @@ require('lazy').setup({
             require('luasnip.loaders.from_snipmate').lazy_load()
         end,
     },
-    {
-        'mrcjkb/rustaceanvim',
-        version = '^4',
-        ft = {
-            'rust',
-        },
-    }, -- rust.
 
     -- Git?
     {
@@ -287,18 +278,18 @@ require('lazy').setup({
             require('colorizer').setup()
         end,
     },
-    {
-        'SmiteshP/nvim-navbuddy',
-        dependencies = {
-            'SmiteshP/nvim-navic',
-            'MunifTanjim/nui.nvim',
-        },
-        opts = {
-            lsp = {
-                auto_attach = true,
-            },
-        },
-    },
+    -- {
+    --     'SmiteshP/nvim-navbuddy',
+    --     dependencies = {
+    --         'SmiteshP/nvim-navic',
+    --         'MunifTanjim/nui.nvim',
+    --     },
+    --     opts = {
+    --         lsp = {
+    --             auto_attach = true,
+    --         },
+    --     },
+    -- },
     {
         'IogaMaster/neocord',
         event = 'VeryLazy',
@@ -309,7 +300,9 @@ require('lazy').setup({
     {
         'ray-x/lsp_signature.nvim',
         config = function()
-            require('lsp_signature').setup()
+            require('lsp_signature').setup({
+                hint_enable = false,
+            })
         end,
     },
     {
@@ -427,12 +420,6 @@ require('lazy').setup({
         end,
     },
     {
-        'simrat39/inlay-hints.nvim',
-        config = function()
-            require('inlay-hints').setup()
-        end,
-    },
-    {
         'echasnovski/mini.comment',
         config = function()
             require('mini.comment').setup({
@@ -502,18 +489,19 @@ require('lazy').setup({
 
 require('BluePlum.set')
 require('BluePlum.remap')
+require('BluePlum.colors')
 
-vim.g.rustaceanvim = {
-    server = {
-        cmd = function()
-            local mason_registry = require('mason-registry')
-            local package = mason_registry.get_package('rust-analyzer')
-            local install_dir = package:get_install_path()
-            -- find out where the binary is in the install dir, and append it to the install dir
-            local ra_bin = install_dir .. '/' .. 'rust-analyzer.exe' -- this may need tweaking
-            return {
-                ra_bin,
-            } -- you can add additional args like `'--logfile', '/path/to/logfile'` to the list
-        end,
-    },
-}
+-- vim.g.rustaceanvim = {
+--     server = {
+--         cmd = function()
+--             local mason_registry = require('mason-registry')
+--             local package = mason_registry.get_package('rust-analyzer')
+--             local install_dir = package:get_install_path()
+--             -- find out where the binary is in the install dir, and append it to the install dir
+--             local ra_bin = install_dir .. '/' .. 'rust-analyzer.exe' -- this may need tweaking
+--             return {
+--                 ra_bin,
+--             } -- you can add additional args like `'--logfile', '/path/to/logfile'` to the list
+--         end,
+--     },
+-- }

@@ -31,3 +31,7 @@ end
 
 -- Oil
 vim.keymap.set('n', '<leader>ex', ':Oil<CR>')
+
+-- Trouble
+-- el = error list
+vim.keymap.set('n', '<leader>el', ':Trouble diagnostics toggle focus=true<CR>')

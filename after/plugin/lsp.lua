@@ -101,7 +101,7 @@ lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
     -- lsp.default_keymaps({buffer = bufnr})
-    require('inlay-hints').on_attach(client, bufnr)
+    -- require('inlay-hints').on_attach(client, bufnr)
 
     -- goto defeniition
     vim.keymap.set('n', 'gd', function()
@@ -117,4 +117,10 @@ require('mason-lspconfig').setup({
     handlers = {
         lsp.default_setup,
     },
+})
+
+-- Diagnostics
+
+vim.diagnostic.config({
+    severity_sort = true,
 })
